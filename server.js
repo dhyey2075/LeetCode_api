@@ -2,8 +2,15 @@ import express from 'express';
 import fetch from 'node-fetch';
 import { decode } from 'html-entities';
 import { LeetCode } from 'leetcode-query';
+import cors from 'cors';
 
 const app = express();
+
+app.use(cors({
+    origin: (origin, cb) => cb(null, true),
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    credentials: true,
+  }));
 
 app.get('/api/blog/article/data-structure/:slug', async (req, res) => {
     const slug = req.params.slug;
